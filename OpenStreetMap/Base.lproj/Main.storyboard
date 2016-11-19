@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GRT-xa-M9U">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11755"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,51 +23,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X7i-L5-bp0">
-                                <rect key="frame" x="16" y="28" width="343" height="611"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TIq-vH-21L">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="611"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="zhB-LA-e96">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="611"/>
-                                                <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KbG-9b-9ta">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="611"/>
-                                                        <subviews>
-                                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8Ih-tl-4f4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="343" height="611"/>
-                                                            </mapView>
-                                                        </subviews>
-                                                        <constraints>
-                                                            <constraint firstAttribute="bottom" secondItem="8Ih-tl-4f4" secondAttribute="bottom" id="0KB-sx-ISV"/>
-                                                            <constraint firstItem="8Ih-tl-4f4" firstAttribute="top" secondItem="KbG-9b-9ta" secondAttribute="top" id="0jP-LJ-oK0"/>
-                                                            <constraint firstAttribute="trailing" secondItem="8Ih-tl-4f4" secondAttribute="trailing" id="6Ac-yz-xi2"/>
-                                                            <constraint firstItem="8Ih-tl-4f4" firstAttribute="leading" secondItem="KbG-9b-9ta" secondAttribute="leading" id="nzb-N9-gFa"/>
-                                                        </constraints>
-                                                    </stackView>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dRG-uV-6Mt">
+                                <rect key="frame" x="16" y="64" width="343" height="559"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="X7i-L5-bp0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Hl-0d-Jjb"/>
-                            <constraint firstItem="X7i-L5-bp0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="BGJ-2a-VB9"/>
-                            <constraint firstItem="X7i-L5-bp0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="lnC-Br-UHx"/>
-                            <constraint firstItem="X7i-L5-bp0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="pof-u4-NjQ"/>
+                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8rI-O5-qma"/>
+                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="emz-Cs-TWB"/>
+                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="tkv-HO-J0D"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="dRG-uV-6Mt" secondAttribute="bottom" constant="44" id="x5I-Zs-F3m"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HMI-8J-tGV">
+                        <leftBarButtonItems>
+                            <barButtonItem title="OSM" id="nKD-Qi-Oeg">
+                                <connections>
+                                    <action selector="OSM:" destination="BYZ-38-t0r" id="Bws-9o-iJf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="5" title="W-Color" id="7ss-Hp-U2g">
+                                <connections>
+                                    <action selector="choseMap:" destination="BYZ-38-t0r" id="a8L-5a-ox2"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="4" title="Terrain" id="l7l-ki-7NP">
+                                <connections>
+                                    <action selector="terrain:" destination="BYZ-38-t0r" id="x5k-5i-2aC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="1" title="Cycle" id="b4e-6e-Dh3">
+                                <connections>
+                                    <action selector="cycle:" destination="BYZ-38-t0r" id="yhN-2A-jNU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="3" title="Toner" id="Tsf-5V-aOB">
+                                <connections>
+                                    <action selector="toner:" destination="BYZ-38-t0r" id="KHD-sK-SXS"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="Tport" id="7fj-KI-MZV">
+                                <connections>
+                                    <action selector="xport:" destination="BYZ-38-t0r" id="rXX-an-bom"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" tag="2" title="Apple" id="A2q-pO-Uff">
+                            <connections>
+                                <action selector="Apple:" destination="BYZ-38-t0r" id="pSw-tT-Gy8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="MapView" destination="8Ih-tl-4f4" id="BhK-Yb-3d3"/>
+                        <outlet property="MapView" destination="dRG-uV-6Mt" id="LVa-68-RZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-23.199999999999999" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1821.5999999999999" y="138.0809595202399"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mg4-Y7-nUe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GRT-xa-M9U" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZFb-pk-eDs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="LB0-Gq-HGj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eqi-1e-lYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="915.94202898550736" y="138.58695652173915"/>
         </scene>
     </scenes>
 </document>

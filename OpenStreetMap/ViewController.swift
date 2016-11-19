@@ -10,10 +10,135 @@
 import UIKit
 import MapKit
 
+//var template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
+//var overlay =  MKTileOverlay (urlTemplate: template)
+
 class ViewController: UIViewController, MKMapViewDelegate {
+
 
     @IBOutlet weak var MapView: MKMapView!
     
+    @IBAction func terrain(_ sender: Any) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
+        
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+        
+        MapView.setNeedsDisplay()
+    }
+    
+    @IBAction func cycle(_ sender: Any) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
+        
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+        
+        MapView.setNeedsDisplay()
+
+    }
+    @IBAction func toner(_ sender: Any) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
+        
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+        
+        MapView.setNeedsDisplay()
+
+    }
+    
+    @IBAction func xport(_ sender: UIBarButtonItem) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
+        
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+        
+        MapView.setNeedsDisplay()
+    }
+
+    @IBAction func train(_ sender: UIBarButtonItem) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"
+        //let template = "http://tiles.openrailwaymap.org/standard/${z}/${x}/${y}.png"
+        
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+        
+        MapView.setNeedsDisplay()
+    }
+    
+    @IBAction func choseMap(_ sender: UIBarButtonItem) {
+        
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
+
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+
+        MapView.setNeedsDisplay()
+        
+    }
+    
+    @IBAction func OSM(_ sender: UIBarButtonItem) {
+        
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+
+        let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+        let overlay = MKTileOverlay (urlTemplate: template)
+        overlay.canReplaceMapContent = true
+        
+        MapView.add(overlay, level: .aboveLabels)
+
+    }
+
+    @IBAction func Apple(_ sender: UIBarButtonItem) {
+        let overlays = MapView.overlays
+        MapView.removeOverlays(overlays)
+        
+        //        let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
+        //
+        //        let overlay = MKTileOverlay (urlTemplate: template)
+        //        overlay.canReplaceMapContent = true
+        //
+        //        MapView.add(overlay, level: .aboveLabels)
+        
+        //MapView.mapType = MKMapType.satelliteFlyover
+        
+        MapView.showsTraffic = true
+        
+        MapView.setNeedsDisplay()
+        
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,7 +166,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         )
         
         //SET UP ZOOM
-        let viewRegion : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(location, 500, 500);
+        let viewRegion : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(location, 10000, 10000);
         let adjustedRegion : MKCoordinateRegion = self.MapView.regionThatFits(viewRegion);
         MapView.setRegion(adjustedRegion ,animated:true);
         MapView.showsUserLocation = true;
