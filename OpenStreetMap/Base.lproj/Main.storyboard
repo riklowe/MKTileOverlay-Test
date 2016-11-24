@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11760" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="GRT-xa-M9U">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11755"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,69 +14,83 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OpenStreetMap" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dRG-uV-6Mt">
-                                <rect key="frame" x="16" y="64" width="343" height="559"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8rI-O5-qma"/>
-                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="emz-Cs-TWB"/>
-                            <constraint firstItem="dRG-uV-6Mt" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="tkv-HO-J0D"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="dRG-uV-6Mt" secondAttribute="bottom" constant="44" id="x5I-Zs-F3m"/>
-                        </constraints>
-                    </view>
+                    <mapView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="g0q-6H-3Uq">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    </mapView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="HMI-8J-tGV">
                         <leftBarButtonItems>
+                            <barButtonItem tag="2" title="Apple" id="A2q-pO-Uff">
+                                <connections>
+                                    <action selector="Apple:" destination="BYZ-38-t0r" id="pSw-tT-Gy8"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="OSM" id="nKD-Qi-Oeg">
                                 <connections>
                                     <action selector="OSM:" destination="BYZ-38-t0r" id="Bws-9o-iJf"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem tag="5" title="W-Color" id="7ss-Hp-U2g">
+                            <barButtonItem tag="5" title="WCol" id="7ss-Hp-U2g">
                                 <connections>
                                     <action selector="choseMap:" destination="BYZ-38-t0r" id="a8L-5a-ox2"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem tag="4" title="Terrain" id="l7l-ki-7NP">
+                            <barButtonItem tag="4" title="Ter" id="l7l-ki-7NP">
                                 <connections>
                                     <action selector="terrain:" destination="BYZ-38-t0r" id="x5k-5i-2aC"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem tag="1" title="Cycle" id="b4e-6e-Dh3">
+                            <barButtonItem tag="1" title="Cyc" id="b4e-6e-Dh3">
                                 <connections>
                                     <action selector="cycle:" destination="BYZ-38-t0r" id="yhN-2A-jNU"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem tag="3" title="Toner" id="Tsf-5V-aOB">
+                            <barButtonItem tag="3" title="Ton" id="Tsf-5V-aOB">
                                 <connections>
                                     <action selector="toner:" destination="BYZ-38-t0r" id="KHD-sK-SXS"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem tag="2" title="Tport" id="7fj-KI-MZV">
+                            <barButtonItem tag="2" title="XPrt" id="7fj-KI-MZV">
                                 <connections>
                                     <action selector="xport:" destination="BYZ-38-t0r" id="rXX-an-bom"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem tag="2" title="Hike" id="EiI-4J-9VB">
+                                <connections>
+                                    <action selector="hike:" destination="BYZ-38-t0r" id="NHO-oJ-YkW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="Wea" id="nT3-Uf-uyn">
+                                <connections>
+                                    <action selector="weather:" destination="BYZ-38-t0r" id="FIy-k4-FbU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="train" id="pu9-FQ-FlF">
+                                <connections>
+                                    <action selector="train:" destination="BYZ-38-t0r" id="tK0-bk-St3"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="Thu" id="Xgb-Gq-s0F">
+                                <connections>
+                                    <action selector="thunder:" destination="BYZ-38-t0r" id="pJX-Q6-cjj"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="PT" id="4wz-Oi-dyh">
+                                <connections>
+                                    <action selector="topo:" destination="BYZ-38-t0r" id="idL-gZ-fek"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem tag="2" title="Terrain" id="52b-WC-GMR">
+                                <connections>
+                                    <action selector="snow:" destination="BYZ-38-t0r" id="y1P-OD-Dyv"/>
+                                </connections>
+                            </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" tag="2" title="Apple" id="A2q-pO-Uff">
-                            <connections>
-                                <action selector="Apple:" destination="BYZ-38-t0r" id="pSw-tT-Gy8"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="MapView" destination="dRG-uV-6Mt" id="LVa-68-RZO"/>
+                        <outlet property="MapView" destination="g0q-6H-3Uq" id="5iE-BV-qK6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
