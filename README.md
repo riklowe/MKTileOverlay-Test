@@ -96,3 +96,21 @@ let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
 
 let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
 
+
+
+Note : App Transport Security Setting 
+
+In order to access http resources an entry must be made in the plist file - for each domain you wish to access
+
+			<key>tile.openstreetmap.org</key>
+			<dict>
+				<key>NSAllowsArbitraryLoads</key>
+				<true/>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+
