@@ -15,7 +15,6 @@
 		707BDFB01DDD0ECC0043E427 /* OpenStreetMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDFAF1DDD0ECC0043E427 /* OpenStreetMapTests.swift */; };
 		707BDFBB1DDD0ECC0043E427 /* OpenStreetMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDFBA1DDD0ECC0043E427 /* OpenStreetMapUITests.swift */; };
 		707BDFCA1DDD110A0043E427 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BDFC91DDD110A0043E427 /* MapKit.framework */; };
-		707BDFCC1DDD1A9A0043E427 /* customOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDFCB1DDD1A9A0043E427 /* customOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +49,6 @@
 		707BDFBA1DDD0ECC0043E427 /* OpenStreetMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStreetMapUITests.swift; sourceTree = "<group>"; };
 		707BDFBC1DDD0ECC0043E427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		707BDFC91DDD110A0043E427 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		707BDFCB1DDD1A9A0043E427 /* customOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +103,6 @@
 			children = (
 				707BDF9A1DDD0ECB0043E427 /* AppDelegate.swift */,
 				707BDF9C1DDD0ECB0043E427 /* ViewController.swift */,
-				707BDFCB1DDD1A9A0043E427 /* customOverlay.swift */,
 				707BDF9E1DDD0ECB0043E427 /* Main.storyboard */,
 				707BDFA11DDD0ECB0043E427 /* Assets.xcassets */,
 				707BDFA31DDD0ECB0043E427 /* LaunchScreen.storyboard */,
@@ -283,7 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				707BDF9D1DDD0ECB0043E427 /* ViewController.swift in Sources */,
-				707BDFCC1DDD1A9A0043E427 /* customOverlay.swift in Sources */,
 				707BDF9B1DDD0ECB0043E427 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
