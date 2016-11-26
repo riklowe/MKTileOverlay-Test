@@ -5,29 +5,32 @@
 //  Created by Richard Lowe on 16/11/2016.
 //  Copyright © 2016 Richard Lowe. All rights reserved.
 //
-//http://nshipster.com/mktileoverlay-mkmapsnapshotter-mkdirections/
 
 import UIKit
 import MapKit
 
-//var template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
-//var overlay =  MKTileOverlay (urlTemplate: template)
-
-
 /*
-
+ 
+ Resources used
+ http://nshipster.com/mktileoverlay-mkmapsnapshotter-mkdirections/
  http://wiki.openstreetmap.org/wiki/Tile_servers
- 
  https://community.tibco.com/wiki/geoanalytics-resources
- 
 
 */
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+
+    //used for Location detection
+    //which is currently disabled
+    
+    var manager : CLLocationManager!
+    var latDelta : CLLocationDegrees = 0.005
+    var lonDelta : CLLocationDegrees = 0.005
+    var latitude : CLLocationDegrees = 40.7
+    var longitude : CLLocationDegrees = -53.0
 
     @IBOutlet weak var MapView: MKMapView!
-
     
     @IBAction func snow(_ sender: UIBarButtonItem) {
 
@@ -35,38 +38,44 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //let template = "http://tile1.maptoolkit.net/bikemap/{z}/{x}/{y}.png"
 
         let template = "http://tile1.maptoolkit.net/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
         
+    }
+    
+    @IBAction func Lonvia(_ sender: UIBarButtonItem) {
+        //let template = "http://tile.lonvia.de/mtb/{z}/{x}/{y}.png"
+        let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
+        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func terrain(_ sender: Any) {
         
         let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
     }
     
     @IBAction func cycle(_ sender: Any) {
         
         let template = "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
     }
     @IBAction func toner(_ sender: Any) {
 
         let template = "http://a.tile.stamen.com/toner/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
     }
     
     @IBAction func xport(_ sender: UIBarButtonItem) {
         let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func choseMap(_ sender: UIBarButtonItem) {
         let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func thunder(_ sender: UIBarButtonItem) {
@@ -78,7 +87,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //let template = "http://tile.thunderforest.com/transport/{z}/{x}/{y}.png"
         
         //let template = "http://tile.thunderforest.com/cycle/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
     }
     
@@ -88,7 +97,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //let template = "http://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png"
         //let template = "http://tiles.openrailwaymap.org/signals/{z}/{x}/{y}.png"
         
-        showMap(temp: template, olay: false, clear: true, tileSize: 512)
+        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 512)
         
     }
     
@@ -96,18 +105,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
         //let template = "http://tile.opentopomap.org/{z}/{x}/{y}.png"
         //let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
         let template = "http://www.openptmap.org/tiles/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: false, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func hike(_ sender: UIBarButtonItem) {
         let template = "http://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func weather(_ sender: UIBarButtonItem) {
         var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
         //let template = "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
         
@@ -151,18 +160,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
         template = "http://weather.openportguide.de/tiles/actual/wind_stream/5/{z}/{x}/{y}.png"
         //let template = "http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.png"
         
-        showMap(temp: template, olay: true, clear: false, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
         
         
         template = "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: false, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
 
     }
     
     @IBAction func OSM(_ sender: UIBarButtonItem) {
         
         let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, olay: true, clear: true, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
 
     }
 
@@ -183,7 +192,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         //MAP DELEGATE
-        //self.MapView.delegate = self
+        self.MapView.delegate = self
         
         //URL BY DEFAULT
         let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -214,38 +223,53 @@ class ViewController: UIViewController, MKMapViewDelegate {
 //        MapView.addAnnotation(annotation)
         
         
-        //ADDING MY CUSTOM OVERLAY CLASS
+        //user location disabled
+        manager = CLLocationManager()
+//        manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        manager.requestWhenInUseAuthorization()
+        manager.startUpdatingLocation()
         
-        //MKTileOverlay *overlay = [[MKTileOverlay alloc] initWithURLTemplate:template]; // (2)
-        
-        MapView.delegate = self
+//        MapView.isUserInteractionEnabled = true
+//        MapView.isMultipleTouchEnabled = true
 
-        showMap(temp: template, olay: true, clear: false, tileSize: 256)
+        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
         
     }
     
-    func showMap(temp : String, olay : Bool, clear : Bool, tileSize : Int) {
+    //***************************************************************************************
+    //main map display
+    //***************************************************************************************
+    
+    func showMap(temp : String, isOverlay : Bool, clearOverlays : Bool, tileSize : Int) {
         
         //clear existing overlays
-        if clear {
+        if clearOverlays {
             let overlays = MapView.overlays
             MapView.removeOverlays(overlays)
         }
         
         let overlay = MKTileOverlay (urlTemplate: temp)
-        overlay.canReplaceMapContent = olay
+        overlay.canReplaceMapContent = isOverlay
         
         if tileSize > 0 {
             overlay.tileSize = CGSize(width: tileSize, height: tileSize)
         }
         
-        
-        
         MapView.add(overlay, level: .aboveLabels)
 
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    //***************************************************************************************
     //delegate
+    //***************************************************************************************
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let tileOverlay = overlay as? MKTileOverlay else {
             return MKOverlayRenderer()
@@ -253,13 +277,30 @@ class ViewController: UIViewController, MKMapViewDelegate {
         return MKTileOverlayRenderer(tileOverlay: tileOverlay)
     }
     
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        MapView.showsUserLocation = true
+        
+        
+        let userLocation: CLLocation = locations[0]
+        
+        latitude  = userLocation.coordinate.latitude
+        longitude = userLocation.coordinate.longitude
+        
+        latDelta = MapView.region.span.latitudeDelta
+        lonDelta = MapView.region.span.longitudeDelta
+        
+        MapView.showsUserLocation = true
+        
+        let span : MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+        let location : CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+        let region : MKCoordinateRegion = MKCoordinateRegionMake(location, span)
+        
+        MapView.setRegion(region, animated: true)
+        
     }
+        
+    
 
 
 }
