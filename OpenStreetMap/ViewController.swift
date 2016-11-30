@@ -32,12 +32,16 @@ import MapKit
  let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
  let template = "http://tile.thunderforest.com/transport/{z}/{x}/{y}.png"
  let template = "http://tile.thunderforest.com/cycle/{z}/{x}/{y}.png"
+ 
  let template = "http://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png"
  let template = "http://tiles.openrailwaymap.org/signals/{z}/{x}/{y}.png"
+ let template = "http://tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"
+
  let template = "http://tile.opentopomap.org/{z}/{x}/{y}.png"
  let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
 
  template = "http://weather.openportguide.de/tiles/actual/surface_pressure/5/{z}/{x}/{y}.png"
+
  template = "http://tile.openweathermap.org/clouds/{z}/{x}/{y}.png"
  let template = "http://weather.openportguide.de/tiles/actual/air_temperature/5/{z}/{x}/{y}.png"
  let template = "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
@@ -132,81 +136,81 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //        MapView.isUserInteractionEnabled = true
         //        MapView.isMultipleTouchEnabled = true
         
-        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
         
     }
     
     @IBAction func snow(_ sender: UIBarButtonItem) {
 
         let template = "http://tile1.maptoolkit.net/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func Lonvia(_ sender: UIBarButtonItem) {
         
         let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func terrain(_ sender: Any) {
         
         let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func cycle(_ sender: Any) {
         
         let template = "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
 
     }
     @IBAction func toner(_ sender: Any) {
 
         let template = "http://a.tile.stamen.com/toner/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
 
     }
     
     @IBAction func xport(_ sender: UIBarButtonItem) {
         
         let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func choseMap(_ sender: UIBarButtonItem) {
         
         let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func thunder(_ sender: UIBarButtonItem) {
 
         let template = "http://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
 
     }
     
     @IBAction func train(_ sender: UIBarButtonItem) {
 
-        let template = "http://tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 512)
+        let template = "http://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png"
+        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 512)
         
     }
     
     @IBAction func topo(_ sender: UIBarButtonItem) {
 
         let template = "http://www.openptmap.org/tiles/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: false, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
         
     }
     
     @IBAction func hike(_ sender: UIBarButtonItem) {
         let template = "http://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
     }
     
     @IBAction func weather(_ sender: UIBarButtonItem) {
@@ -217,20 +221,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // the other is a weather map
         
         var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
 
         template = "http://weather.openportguide.de/tiles/actual/wind_stream/5/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
         
         template = "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: false, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
+        
+//        let template = "http://tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png"
+//        showMap(temp: template, IsBaseLayer: false, clearOverlays: false, tileSize: 256)
+
 
     }
     
     @IBAction func OSM(_ sender: UIBarButtonItem) {
         
         let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, isOverlay: true, clearOverlays: true, tileSize: 256)
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
 
     }
     
@@ -247,10 +255,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
 //***************************************************************************************
 //main map display
-// if isOverlay = true then replace base map
+// if IsBaseLayer = true then replace base map
 //***************************************************************************************
     
-    func showMap(temp : String, isOverlay : Bool, clearOverlays : Bool, tileSize : Int) {
+    func showMap(temp : String, IsBaseLayer : Bool, clearOverlays : Bool, tileSize : Int) {
         
         //clear existing overlays
         if clearOverlays {
@@ -259,7 +267,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         
         let overlay = MKTileOverlay (urlTemplate: temp)
-        overlay.canReplaceMapContent = isOverlay
+        overlay.canReplaceMapContent = IsBaseLayer
         
         if tileSize > 0 {
             overlay.tileSize = CGSize(width: tileSize, height: tileSize)
