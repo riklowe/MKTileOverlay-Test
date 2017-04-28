@@ -11,7 +11,6 @@ TileMaps
 below are a sample of slippy maps if have tried - most are working
 some require access permissions - so contact the data owners
 
-
 format for weather.openportguide.de
  
 http://weather.openportguide.de/tiles/actual/variable/timestep/zoom/X/Y.png
@@ -87,16 +86,6 @@ import Foundation
 //    "http://tiles.mapbox.com/v4/heyitsgarrett.kf2a2nb1/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiaGV5aXRzZ2FycmV0dCIsImEiOiIwdWt5ZlpjIn0.73b7Y47rgFnSD7QCNeS-zA",
 //    "http://tiles.mapbox.com/v4/matt.72ef5189/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoiZHVuY2FuZ3JhaGFtIiwiYSI6IlJJcWdFczQifQ.9HUpTV1es8IjaGAf_s64VQ",
 //    "http://tiles.mapbox.com/v4/peterqliu.9d05be4d/{z}/{x}/{y}@2x.png?access_token=pk.eyJ1IjoiZHVuY2FuZ3JhaGFtIiwiYSI6IlJJcWdFczQifQ.9HUpTV1es8IjaGAf_s64VQ",
-
-
-//...........
-
-
-
-
-
-
-
 
 let overlayData = [
     "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png",

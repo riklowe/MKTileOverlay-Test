@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S3H-ES-BgH">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="30" width="375" height="50"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lia-K0-ch5">
                                                 <rect key="frame" x="0.0" y="4" width="375" height="42"/>
@@ -41,10 +41,10 @@
                                         </constraints>
                                     </view>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hZq-7j-qWn">
-                                        <rect key="frame" x="20" y="104" width="335" height="465"/>
+                                        <rect key="frame" x="20" y="84" width="335" height="519"/>
                                     </mapView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AF1-Jo-o39">
-                                        <rect key="frame" x="0.0" y="573" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="607" width="375" height="50"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3b-yf-qln">
                                                 <rect key="frame" x="0.0" y="4" width="375" height="42"/>
@@ -66,9 +66,9 @@
                                 <constraints>
                                     <constraint firstItem="o3b-yf-qln" firstAttribute="top" secondItem="hZq-7j-qWn" secondAttribute="bottom" constant="8" id="6sw-p5-RgR"/>
                                     <constraint firstItem="hZq-7j-qWn" firstAttribute="leading" secondItem="0Uu-Pa-1DS" secondAttribute="leading" constant="20" symbolic="YES" id="EEk-YL-LOs"/>
-                                    <constraint firstAttribute="bottom" secondItem="AF1-Jo-o39" secondAttribute="bottom" constant="44" id="Ncd-S7-0mJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="AF1-Jo-o39" secondAttribute="bottom" constant="10" id="Ncd-S7-0mJ"/>
                                     <constraint firstItem="AF1-Jo-o39" firstAttribute="leading" secondItem="0Uu-Pa-1DS" secondAttribute="leading" id="Rtc-s3-nkz"/>
-                                    <constraint firstItem="S3H-ES-BgH" firstAttribute="top" secondItem="0Uu-Pa-1DS" secondAttribute="top" constant="50" id="TmR-Rm-IqG"/>
+                                    <constraint firstItem="S3H-ES-BgH" firstAttribute="top" secondItem="0Uu-Pa-1DS" secondAttribute="top" constant="30" id="TmR-Rm-IqG"/>
                                     <constraint firstItem="AF1-Jo-o39" firstAttribute="centerX" secondItem="hZq-7j-qWn" secondAttribute="centerX" id="Wdb-uc-mmC"/>
                                     <constraint firstItem="S3H-ES-BgH" firstAttribute="leading" secondItem="0Uu-Pa-1DS" secondAttribute="leading" id="gHc-ho-SIg"/>
                                     <constraint firstItem="hZq-7j-qWn" firstAttribute="top" secondItem="lia-K0-ch5" secondAttribute="bottom" constant="8" id="gyp-c0-Ldf"/>

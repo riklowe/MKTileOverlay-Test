@@ -102,17 +102,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
     
-//    func clearAllOverlays() {
-//    
-//        //just display basic apple map
-//        // but enable traffic
-//        
-//        let overlays = MapView.overlays
-//        MapView.removeOverlays(overlays)
-//        
-//        MapView.showsTraffic = true
-//    }
-
 //***************************************************************************************
 //main map display
 // if IsBaseLayer = true then replace base map
@@ -266,13 +255,35 @@ extension ViewController  : UIPickerViewDataSource, UIPickerViewDelegate{
     //    //============================================================================
     //    //============================================================================
     //    //============================================================================
-//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-//    {
-//        
-//        print("********* \(#function) **********")
-//        
-//        return pickerLabel
-//    }
-    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        var label: UILabel
+        
+        if let view = view as? UILabel {
+            label = view
+        } else {
+            label = UILabel()
+        }
+        
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "SanFranciscoText-Light", size: 18)
+        
+        // where data is an Array of String
+        
+        switch pickerView {
+        case overlayPicker :
+            label.text = overlayData[row]
+            
+        case baseMapPick :
+            label.text = baseData[row]
+            
+        default :
+            label.text = ""
+        }
+
+        return label
+    }
+
 }
 
