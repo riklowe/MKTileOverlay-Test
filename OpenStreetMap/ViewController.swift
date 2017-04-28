@@ -24,28 +24,7 @@ import MapKit
  below are a sample of slippy maps if have tried - most are working 
  some require access permissions - so contact the data owners
  
- let template = "http://www.opensnowmap.org/opensnowmap-overlay/{z}/{x}/{y}.png"
- let template = "http://tile1.maptoolkit.net/bikemap/{z}/{x}/{y}.png"
- let template = "http://tile.lonvia.de/mtb/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/landscape/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/transport/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/cycle/{z}/{x}/{y}.png"
- 
- let template = "http://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png"
- let template = "http://tiles.openrailwaymap.org/signals/{z}/{x}/{y}.png"
- let template = "http://tiles.openrailwaymap.org/standard/{z}/{x}/{y}.png"
 
- let template = "http://tile.opentopomap.org/{z}/{x}/{y}.png"
- let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
-
- template = "http://weather.openportguide.de/tiles/actual/surface_pressure/5/{z}/{x}/{y}.png"
-
- template = "http://tile.openweathermap.org/clouds/{z}/{x}/{y}.png"
- let template = "http://weather.openportguide.de/tiles/actual/air_temperature/5/{z}/{x}/{y}.png"
- let template = "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
- 
  format
  http://weather.openportguide.de/tiles/actual/variable/timestep/zoom/X/Y.png
  
@@ -59,9 +38,11 @@ import MapKit
          timestep 27 ≈ 22*3h = 66h in the future
  
  rain
- http://weather.openportguide.de/tiles/actual/precipitation/5/5/15/10.png
- http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/5/15/10.png
+ http://weather.openportguide.de/tiles/actual/precipitation/5/4/15/15.png
+ "http://weather.openportguide.de/tiles/actual/precipitation/5/{z}/{x}/{y}"
  
+ http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/4/15/10.png
+http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.png
  temp
   http://weather.openportguide.de/tiles/actual/air_temperature/5/5/15/10.png
  
@@ -76,21 +57,14 @@ import MapKit
  http://weather.openportguide.de/tiles/actual/FL300_wind_barb/5/5/15/10.png
   http://weather.openportguide.de/tiles/actual/FL400_wind_barb/5/5/15/10.png
  
- let template = "http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.png"
-
- let template = "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
- let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
- let template = "http://mt0.google.com/vt/x={x}&y={y}&z={z}"
- let template = "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
- let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
- let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
-
  ****************************************************************************************
  ****************************************************************************************
  ****************************************************************************************/
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
+    @IBOutlet weak var overlayPicker: UIPickerView!
+    @IBOutlet weak var baseMapPick: UIPickerView!
 
     //used for Location detection
     //which is currently disabled
@@ -103,6 +77,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var MapView: MKMapView!
 
     override func viewDidLoad() {
+        print("********* \(#function) **********")
         
         super.viewDidLoad()
         
@@ -112,7 +87,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //URL BY DEFAULT
         let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
         
-        //CENTER MAP TO THIS POI
+         //CENTER MAP TO THIS POI
         let location = CLLocationCoordinate2D(
             latitude: 52.335,
             longitude: -0.209
@@ -122,6 +97,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let viewRegion : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(location, 10000, 10000);
         let adjustedRegion : MKCoordinateRegion = self.MapView.regionThatFits(viewRegion);
         MapView.setRegion(adjustedRegion ,animated:true);
+        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
         
         //MapView.showsUserLocation = true;
         
@@ -136,122 +112,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //        MapView.isUserInteractionEnabled = true
         //        MapView.isMultipleTouchEnabled = true
         
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
+        baseMapPick.delegate = self
+        baseMapPick.dataSource = self
+        
+        overlayPicker.delegate = self
+        overlayPicker.dataSource = self
         
     }
     
-    @IBAction func snow(_ sender: UIBarButtonItem) {
-
-        let template = "http://tile1.maptoolkit.net/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
-        
-    }
-    
-    @IBAction func Lonvia(_ sender: UIBarButtonItem) {
-        
-        let template = "http://tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
-        
-    }
-    
-    @IBAction func terrain(_ sender: Any) {
-        
-        let template = "http://tile.stamen.com/terrain/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-    }
-    
-    @IBAction func cycle(_ sender: Any) {
-        
-        let template = "http://tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-
-    }
-    @IBAction func toner(_ sender: Any) {
-
-        let template = "http://a.tile.stamen.com/toner/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-
-    }
-    
-    @IBAction func xport(_ sender: UIBarButtonItem) {
-        
-        let template = "http://tile.opencyclemap.org/transport/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-        
-    }
-    
-    @IBAction func choseMap(_ sender: UIBarButtonItem) {
-        
-        let template = "http://tile.stamen.com/watercolor/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-        
-    }
-    
-    @IBAction func thunder(_ sender: UIBarButtonItem) {
-
-        let template = "http://tile.thunderforest.com/pioneer/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-
-    }
-    
-    @IBAction func train(_ sender: UIBarButtonItem) {
-
-        let template = "http://tiles.openrailwaymap.org/maxspeed/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 512)
-        
-    }
-    
-    @IBAction func topo(_ sender: UIBarButtonItem) {
-
-        let template = "http://www.openptmap.org/tiles/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: false, clearOverlays: true, tileSize: 256)
-        
-    }
-    
-    @IBAction func hike(_ sender: UIBarButtonItem) {
-        let template = "http://tiles.wmflabs.org/hikebike/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-    }
-    
-    @IBAction func weather(_ sender: UIBarButtonItem) {
-
-        //Note : this one is different from all of the other examples
-        //as it uses a base map and then overlays 2 other sources 
-        // one is the opensea map
-        // the other is a weather map
-        
-        var template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-
-        template = "http://weather.openportguide.de/tiles/actual/wind_stream/5/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
-        
-        template = "http://tiles.openseamap.org/seamark/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
-        
-//        let template = "http://tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png"
-//        showMap(temp: template, IsBaseLayer: false, clearOverlays: false, tileSize: 256)
-
-
-    }
-    
-    @IBAction func OSM(_ sender: UIBarButtonItem) {
-        
-        let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
-
-    }
-    
-    @IBAction func Apple(_ sender: UIBarButtonItem) {
-       
-        //just display basic apple map
-        // but enable traffic
-        
-        let overlays = MapView.overlays
-        MapView.removeOverlays(overlays)
-        
-        MapView.showsTraffic = true
-    }
+//    func clearAllOverlays() {
+//    
+//        //just display basic apple map
+//        // but enable traffic
+//        
+//        let overlays = MapView.overlays
+//        MapView.removeOverlays(overlays)
+//        
+//        MapView.showsTraffic = true
+//    }
 
 //***************************************************************************************
 //main map display
@@ -259,6 +137,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 //***************************************************************************************
     
     func showMap(temp : String, IsBaseLayer : Bool, clearOverlays : Bool, tileSize : Int) {
+        print("********* \(#function) **********")
         
         //clear existing overlays
         if clearOverlays {
@@ -288,13 +167,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 //***************************************************************************************
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print("********* \(#function) **********")
         guard let tileOverlay = overlay as? MKTileOverlay else {
             return MKOverlayRenderer()
         }
+        //print (tileOverlay)
         return MKTileOverlayRenderer(tileOverlay: tileOverlay)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print("********* \(#function) **********")
         
         MapView.showsUserLocation = true
         
@@ -317,5 +199,98 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
     }
 
+}
+
+extension ViewController  : UIPickerViewDataSource, UIPickerViewDelegate{
+    
+    //MARK:- PickerView Delegates
+    //============================================================================
+    //============================================================================
+    //============================================================================
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        print("********* \(#function) **********")
+        
+        // The number of columns of data
+        print("********* \(#function) ********** END")
+        return 1
+    }
+    
+    //============================================================================
+    //============================================================================
+    //============================================================================
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        print("********* \(#function) **********")
+
+        var retVal = 1
+        
+        switch pickerView {
+        case overlayPicker :
+            retVal = overlayData.count
+        case baseMapPick :
+            retVal = baseData.count
+        default :
+            retVal = 1
+        }
+        
+        print("********* \(#function) ********** END")
+        return retVal
+    }
+    
+    //MARK:- PickerView Data Source
+    //============================================================================
+    //============================================================================
+    //============================================================================
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        print("********* \(#function) **********")
+        
+        var retString = ""
+
+        switch pickerView {
+        case overlayPicker :
+            retString = overlayData[row]
+
+        case baseMapPick :
+            retString = baseData[row]
+
+        default :
+            retString = "Error"
+        }
+        
+        print("********* \(#function) ********** END")
+        return retString
+    }
+    
+    //============================================================================
+    //============================================================================
+    //============================================================================
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("********* \(#function) **********")
+        
+        switch pickerView {
+        case overlayPicker :
+            let template = overlayData[row]
+            showMap(temp: template, IsBaseLayer: false, clearOverlays: false, tileSize: 256)
+        case baseMapPick :
+            let template = baseData[row]
+            showMap(temp: template, IsBaseLayer: true, clearOverlays: true, tileSize: 256)
+        default :
+            print ("Error")        }
+
+        print("********* \(#function) ********** END")
+        
+        
+    }
+    
+    //    //============================================================================
+    //    //============================================================================
+    //    //============================================================================
+//    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
+//    {
+//        
+//        print("********* \(#function) **********")
+//        
+//        return pickerLabel
+//    }
+    
 }
 

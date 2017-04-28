@@ -15,6 +15,7 @@
 		707BDFB01DDD0ECC0043E427 /* OpenStreetMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDFAF1DDD0ECC0043E427 /* OpenStreetMapTests.swift */; };
 		707BDFBB1DDD0ECC0043E427 /* OpenStreetMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDFBA1DDD0ECC0043E427 /* OpenStreetMapUITests.swift */; };
 		707BDFCA1DDD110A0043E427 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BDFC91DDD110A0043E427 /* MapKit.framework */; };
+		709149581EB1DD2500C5009E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709149571EB1DD2500C5009E /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		707BDFBA1DDD0ECC0043E427 /* OpenStreetMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStreetMapUITests.swift; sourceTree = "<group>"; };
 		707BDFBC1DDD0ECC0043E427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		707BDFC91DDD110A0043E427 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		709149571EB1DD2500C5009E /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				707BDF9A1DDD0ECB0043E427 /* AppDelegate.swift */,
 				707BDF9C1DDD0ECB0043E427 /* ViewController.swift */,
+				709149571EB1DD2500C5009E /* Data.swift */,
 				707BDF9E1DDD0ECB0043E427 /* Main.storyboard */,
 				707BDFA11DDD0ECB0043E427 /* Assets.xcassets */,
 				707BDFA31DDD0ECB0043E427 /* LaunchScreen.storyboard */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				707BDF9D1DDD0ECB0043E427 /* ViewController.swift in Sources */,
+				709149581EB1DD2500C5009E /* Data.swift in Sources */,
 				707BDF9B1DDD0ECB0043E427 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,7 +379,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -419,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
