@@ -19,24 +19,6 @@ import MapKit
  https://community.tibco.com/wiki/geoanalytics-resources
 
  
- TileMaps
- 
- below are a sample of slippy maps if have tried - most are working 
- some require access permissions - so contact the data owners
- 
-
- format
- http://weather.openportguide.de/tiles/actual/variable/timestep/zoom/X/Y.png
- 
-         timestep 5 ≈ actual time at the moment of the release
-         timestep 7 ≈ 2*3h = 6h in the future
-         timestep 9 ≈ 4*3h = 12h in the future
-         timestep 11 ≈ 6*3h = 18h in the future
-         timestep 15 ≈ 10*3h = 30h in the future
-         timestep 19 ≈ 14*3h = 42h in the future
-         timestep 23 ≈ 18*3h = 54h in the future
-         timestep 27 ≈ 22*3h = 66h in the future
- 
  rain
  http://weather.openportguide.de/tiles/actual/precipitation/5/4/15/15.png
  "http://weather.openportguide.de/tiles/actual/precipitation/5/{z}/{x}/{y}"
