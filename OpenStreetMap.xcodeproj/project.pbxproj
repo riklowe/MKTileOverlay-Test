@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		706BD6DF1EB8EC8C00CDFCE6 /* MKCachingTileOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706BD6DE1EB8EC8C00CDFCE6 /* MKCachingTileOverlay.swift */; };
 		707BDF9B1DDD0ECB0043E427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDF9A1DDD0ECB0043E427 /* AppDelegate.swift */; };
 		707BDF9D1DDD0ECB0043E427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707BDF9C1DDD0ECB0043E427 /* ViewController.swift */; };
 		707BDFA01DDD0ECB0043E427 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 707BDF9E1DDD0ECB0043E427 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		706BD6DE1EB8EC8C00CDFCE6 /* MKCachingTileOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCachingTileOverlay.swift; sourceTree = "<group>"; };
 		707BDF971DDD0ECB0043E427 /* OpenStreetMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenStreetMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		707BDF9A1DDD0ECB0043E427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		707BDF9C1DDD0ECB0043E427 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				707BDF9A1DDD0ECB0043E427 /* AppDelegate.swift */,
 				707BDF9C1DDD0ECB0043E427 /* ViewController.swift */,
 				709149571EB1DD2500C5009E /* Data.swift */,
+				706BD6DE1EB8EC8C00CDFCE6 /* MKCachingTileOverlay.swift */,
 				707BDF9E1DDD0ECB0043E427 /* Main.storyboard */,
 				707BDFA11DDD0ECB0043E427 /* Assets.xcassets */,
 				707BDFA31DDD0ECB0043E427 /* LaunchScreen.storyboard */,
@@ -284,6 +287,7 @@
 			files = (
 				707BDF9D1DDD0ECB0043E427 /* ViewController.swift in Sources */,
 				709149581EB1DD2500C5009E /* Data.swift in Sources */,
+				706BD6DF1EB8EC8C00CDFCE6 /* MKCachingTileOverlay.swift in Sources */,
 				707BDF9B1DDD0ECB0043E427 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

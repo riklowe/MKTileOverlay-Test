@@ -21,10 +21,10 @@ import MapKit
  
  rain
  http://weather.openportguide.de/tiles/actual/precipitation/5/4/15/15.png
- "http://weather.openportguide.de/tiles/actual/precipitation/5/{z}/{x}/{y}"
+ http://weather.openportguide.de/tiles/actual/precipitation/5/{z}/{x}/{y}.png
  
  http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/4/15/10.png
-http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.png
+ http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.png
  temp
   http://weather.openportguide.de/tiles/actual/air_temperature/5/5/15/10.png
  
@@ -34,14 +34,17 @@ http://weather.openportguide.de/tiles/actual/precipitation_shaded/5/{z}/{x}/{y}.
  Wind
   http://weather.openportguide.de/tiles/actual/wind_stream/5/5/15/10.png
   http://weather.openportguide.de/tiles/actual/gust/5/5/15/10.png
- http://weather.openportguide.de/tiles/actual/FL100_wind_barb/5/5/15/10.png
- http://weather.openportguide.de/tiles/actual/FL200_wind_barb/5/5/15/10.png
- http://weather.openportguide.de/tiles/actual/FL300_wind_barb/5/5/15/10.png
+  http://weather.openportguide.de/tiles/actual/FL100_wind_barb/5/5/15/10.png
+  http://weather.openportguide.de/tiles/actual/FL200_wind_barb/5/5/15/10.png
+  http://weather.openportguide.de/tiles/actual/FL300_wind_barb/5/5/15/10.png
   http://weather.openportguide.de/tiles/actual/FL400_wind_barb/5/5/15/10.png
  
  ****************************************************************************************
  ****************************************************************************************
  ****************************************************************************************/
+
+let tapRecForMapView = UITapGestureRecognizer()
+
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
@@ -56,7 +59,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var latitude : CLLocationDegrees = 40.7
     var longitude : CLLocationDegrees = -53.0
 
-    @IBOutlet weak var MapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView!
 
     override func viewDidLoad() {
         print("********* \(#function) **********")
@@ -64,7 +67,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         super.viewDidLoad()
         
         //MAP DELEGATE
-        self.MapView.delegate = self
+        self.mapView.delegate = self
         
         //URL BY DEFAULT
         let template = "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -77,8 +80,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         //SET UP ZOOM
         let viewRegion : MKCoordinateRegion = MKCoordinateRegionMakeWithDistance(location, 10000, 10000);
-        let adjustedRegion : MKCoordinateRegion = self.MapView.regionThatFits(viewRegion);
-        MapView.setRegion(adjustedRegion ,animated:true);
+        let adjustedRegion : MKCoordinateRegion = self.mapView.regionThatFits(viewRegion);
+        mapView.setRegion(adjustedRegion ,animated:true);
         showMap(temp: template, IsBaseLayer: true, clearOverlays: false, tileSize: 256)
         
         //MapView.showsUserLocation = true;
@@ -99,9 +102,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         overlayPicker.delegate = self
         overlayPicker.dataSource = self
+
+        tapRecForMapView.addTarget(self, action: #selector(tappedView))
+        view.addGestureRecognizer(tapRecForMapView)
+        view.isUserInteractionEnabled = true
         
     }
+ 
+    func tappedView() {
+        
+        print("********* \(#function) **********")
+        
+        var overlay : MKCachingTileOverlay? = nil
+        
+        do {
+            overlay = try MKCachingTileOverlay(urlTemplate: "")
+            overlay?.clearCache()
+            print("Init of CachedTileOverlay succeeded")
+        } catch {
+            print("Init of CachedTileOverlay failed with unknown error")
+        }
+        
+        overlay = nil
+    }
     
+    
+
 //***************************************************************************************
 //main map display
 // if IsBaseLayer = true then replace base map
@@ -112,18 +138,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         //clear existing overlays
         if clearOverlays {
-            let overlays = MapView.overlays
-            MapView.removeOverlays(overlays)
+            let overlays = mapView.overlays
+            mapView.removeOverlays(overlays)
         }
         
-        let overlay = MKTileOverlay (urlTemplate: temp)
-        overlay.canReplaceMapContent = IsBaseLayer
+        var overlay : MKTileOverlay? = nil
         
-        if tileSize > 0 {
-            overlay.tileSize = CGSize(width: tileSize, height: tileSize)
+        do {
+            overlay = try MKCachingTileOverlay(urlTemplate: temp)
+            print("Init of CachedTileOverlay succeeded")
+        } catch {
+            print("Init of CachedTileOverlay failed with unknown error")
+            overlay = MKTileOverlay(urlTemplate: temp)
         }
         
-        MapView.add(overlay, level: .aboveLabels)
+        overlay!.canReplaceMapContent = IsBaseLayer
+        mapView.add(overlay!)
+        
+
+        
+//        let overlay = MKTileOverlay (urlTemplate: temp)
+//        overlay.canReplaceMapContent = IsBaseLayer
+//        
+//        if tileSize > 0 {
+//            overlay.tileSize = CGSize(width: tileSize, height: tileSize)
+//        }
+//        
+//        MapView.add(overlay, level: .aboveLabels)
 
     }
 
@@ -149,7 +190,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print("********* \(#function) **********")
         
-        MapView.showsUserLocation = true
+        mapView.showsUserLocation = true
         
         
         let userLocation: CLLocation = locations[0]
@@ -157,16 +198,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         latitude  = userLocation.coordinate.latitude
         longitude = userLocation.coordinate.longitude
         
-        latDelta = MapView.region.span.latitudeDelta
-        lonDelta = MapView.region.span.longitudeDelta
+        latDelta = mapView.region.span.latitudeDelta
+        lonDelta = mapView.region.span.longitudeDelta
         
-        MapView.showsUserLocation = true
+        mapView.showsUserLocation = true
         
         let span : MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
         let location : CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
         let region : MKCoordinateRegion = MKCoordinateRegionMake(location, span)
         
-        MapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: true)
         
     }
 
@@ -285,5 +326,51 @@ extension ViewController  : UIPickerViewDataSource, UIPickerViewDelegate{
         return label
     }
 
+    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
 }
 
+extension Date {
+    /// Returns the amount of years from another date
+    func years(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0
+    }
+    /// Returns the amount of months from another date
+    func months(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.month], from: date, to: self).month ?? 0
+    }
+    /// Returns the amount of weeks from another date
+    func weeks(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.weekOfYear], from: date, to: self).weekOfYear ?? 0
+    }
+    /// Returns the amount of days from another date
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
+    }
+    /// Returns the amount of hours from another date
+    func hours(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.hour], from: date, to: self).hour ?? 0
+    }
+    /// Returns the amount of minutes from another date
+    func minutes(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.minute], from: date, to: self).minute ?? 0
+    }
+    /// Returns the amount of seconds from another date
+    func seconds(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.second], from: date, to: self).second ?? 0
+    }
+    /// Returns the a custom time interval description from another date
+    func offset(from date: Date) -> String {
+        if years(from: date)   > 0 { return "\(years(from: date))y"   }
+        if months(from: date)  > 0 { return "\(months(from: date))M"  }
+        if weeks(from: date)   > 0 { return "\(weeks(from: date))w"   }
+        if days(from: date)    > 0 { return "\(days(from: date))d"    }
+        if hours(from: date)   > 0 { return "\(hours(from: date))h"   }
+        if minutes(from: date) > 0 { return "\(minutes(from: date))m" }
+        if seconds(from: date) > 0 { return "\(seconds(from: date))s" }
+        return ""
+    }
+    
+}

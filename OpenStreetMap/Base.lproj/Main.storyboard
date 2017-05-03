@@ -86,8 +86,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="MapView" destination="hZq-7j-qWn" id="ohf-au-qdt"/>
                         <outlet property="baseMapPick" destination="o3b-yf-qln" id="grn-8b-d1B"/>
+                        <outlet property="mapView" destination="hZq-7j-qWn" id="wIE-qb-SwH"/>
                         <outlet property="overlayPicker" destination="lia-K0-ch5" id="VdZ-Zn-smd"/>
                     </connections>
                 </viewController>
